@@ -32,6 +32,7 @@
                             affichage météo
                     </h3>
                     <form>
+                        <label> localité </label>
                         <select class="form-control" name ="ville" size="1">
                             <?php
                                 $client = new ApiSimpleGetRestClient('http://www.prevision-meteo.ch/services/json');
@@ -44,7 +45,17 @@
                                 }
                             ?>
                         </select>
-                        <button type="submit" class="btn btn-primary">valider</button>
+                        <label> nombre de jours à afficher </label>
+                        <select class="form-control" name="jours" size ="1">
+                            <?php
+                                for($i=1; $i<6;$i++)
+                                {
+                                     echo '<option>'.$i.'</option>'; 
+                                }
+                               
+                            ?>
+                        </select>
+                        <button type="submit" class="btn btn-primary" name ="validation"> valider</button>
 			<table class="table">
                             <thead>
                                     <tr>
@@ -66,12 +77,14 @@
                                  <?php
                                     $client = new ApiSimpleGetRestClient('http://www.prevision-meteo.ch/services/json');
                                     $response =  $client->get('Neuchatel');
-                                    if(!empty($_GET['ville']))
+                                    $nbJours = 5;
+                                    if(isset($_GET['validation']))
                                     {
                                         $response = $client->get($_GET['ville']);
+                                        $nbJours=$_GET['jours'];
                                     }
                                     $data = json_decode(($response),true);
-                                    $nbJours = 5;
+                                    
                                     for($i =0; $i < $nbJours; $i++)
                                     {
                                         echo '<tr>';
