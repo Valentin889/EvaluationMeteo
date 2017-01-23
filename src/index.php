@@ -34,16 +34,10 @@
                     <form>
                         <label> localité </label>
                         <select class="form-control" name ="ville" size="1">
-                            <?php
-                                $client = new ApiSimpleGetRestClient('http://www.prevision-meteo.ch/services/json');
-                                $response =  $client->get('list-cities');
-                                $data = json_decode(($response),true);
-
-                                for($i=0; $i<count($data);$i++)
-                                {
-                                    echo '<option>'.$data[$i]["name"].'</option>';
-                                }
-                            ?>
+                            <option>Neuchâtel</option>
+                            <option>La-chaux-de-fonds</option>
+                            <option>Berne</option>
+                            <option>Lausanne</option>
                         </select>
                         <label> nombre de jours à afficher </label>
                         <select class="form-control" name="jours" size ="1">
@@ -52,7 +46,6 @@
                                 {
                                      echo '<option>'.$i.'</option>'; 
                                 }
-                               
                             ?>
                         </select>
                         <button type="submit" class="btn btn-primary" name ="validation"> valider</button>
@@ -97,6 +90,11 @@
                                 ?>
                             </tbody>
 			</table>
+                    </form>
+                    <form>
+                        <label> nom de la nouvelle ville </label>
+                        <input type="text" name="Nouvelle_Ville">
+                         <button type="submit" class="btn btn-primary" name ="EnvoieVille"> valider</button>
                     </form>
 		</div> 
 	</div>
