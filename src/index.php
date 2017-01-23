@@ -1,3 +1,9 @@
+<?php
+    require_once 'ApiSimpleGetRestClient.php';
+?>
+
+
+
 <!DOCTYPE html>
 <html lang="en">
   <head>
@@ -16,103 +22,68 @@
   </head>
   <body>
 
+     
+      
+      
     <div class="container-fluid">
 	<div class="row">
 		<div class="col-md-12">
-			<h3>
-				h3. Lorem ipsum dolor sit amet.
-			</h3>
+                    <h3>
+                            affichage météo
+                    </h3>
+                    <select class="form-control" name ="ville" size="1">
+                        
+                        <?php
+                            $client = new ApiSimpleGetRestClient('http://www.prevision-meteo.ch/services/json');
+                            $response =  $client->get('list-cities');
+                            $data = json_decode(($response),true);
+                            
+                            for($i=0; $i<count($data);$i++)
+                            {
+                                echo '<option>'.$data[$i]["name"].'</option>';
+                            }
+                            
+                            
+                            
+                        ?>
+
+                    </select>
 			<table class="table">
 				<thead>
 					<tr>
 						<th>
-							#
+							jour
 						</th>
 						<th>
-							Product
+							photo
 						</th>
-						<th>
-							Payment Taken
-						</th>
-						<th>
-							Status
-						</th>
+                                                <th>
+                                                    température minimum
+                                                </th>
+                                                <th>
+                                                    température maximum
+                                                </th>
 					</tr>
 				</thead>
 				<tbody>
-					<tr>
-						<td>
-							1
-						</td>
-						<td>
-							TB - Monthly
-						</td>
-						<td>
-							01/04/2012
-						</td>
-						<td>
-							Default
-						</td>
-					</tr>
-					<tr class="active">
-						<td>
-							1
-						</td>
-						<td>
-							TB - Monthly
-						</td>
-						<td>
-							01/04/2012
-						</td>
-						<td>
-							Approved
-						</td>
-					</tr>
-					<tr class="success">
-						<td>
-							2
-						</td>
-						<td>
-							TB - Monthly
-						</td>
-						<td>
-							02/04/2012
-						</td>
-						<td>
-							Declined
-						</td>
-					</tr>
-					<tr class="warning">
-						<td>
-							3
-						</td>
-						<td>
-							TB - Monthly
-						</td>
-						<td>
-							03/04/2012
-						</td>
-						<td>
-							Pending
-						</td>
-					</tr>
-					<tr class="danger">
-						<td>
-							4
-						</td>
-						<td>
-							TB - Monthly
-						</td>
-						<td>
-							04/04/2012
-						</td>
-						<td>
-							Call in to confirm
-						</td>
-					</tr>
+                                     <?php
+                                        $client = new ApiSimpleGetRestClient('http://www.prevision-meteo.ch/services/json');
+                                        $response =  $client->get('Neuchatel');
+                                        $data = json_decode(($response),true);
+                                        $nbJours = 5;
+                                        for($i =0; $i < $nbJours; $i++)
+                                        {
+                                            echo '<tr>';
+                                            echo '<td>'.$data["fcst_day_$i"]['day_short'].'</td>';
+                                            echo '<td> <img src = '.$data["fcst_day_$i"]['icon'].' alt ="previson"></td>';
+                                            echo '<td>'.$data["fcst_day_$i"]['tmin'].'</td>';
+                                            echo '<td>'.$data["fcst_day_$i"]['tmax'].'</td>';
+                                            echo '</tr>';
+                                        }
+                                    ?>
 				</tbody>
 			</table>
-		</div>
+		</div> 
 	</div>
 </div>
 
@@ -121,3 +92,4 @@
     <script src="js/scripts.js"></script>
   </body>
 </html>
+                                   
