@@ -94,7 +94,7 @@
                     <form>
                         <label> nom de la nouvelle ville </label>
                         <input type="text" name="Nouvelle_Ville">
-                         <button type="submit" class="btn btn-primary" name ="EnvoieVille"> valider</button>
+                        <button type="submit" class="btn btn-primary" name ="EnvoieVille"> valider</button>
                     </form>
 		</div> 
 	</div>
