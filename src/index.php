@@ -1,5 +1,20 @@
 <?php
     require_once 'ApiSimpleGetRestClient.php';
+    $client = new ApiSimpleGetRestClient('http://www.prevision-meteo.ch/services/json');
+    if(isset($_GET['EnvoieVille']))
+    {
+        $response =  $client->get($_GET['Nouvelle_Ville']);
+        $data = json_decode(($response),true);
+        if(isset($data['errors']))
+        {
+            echo 'erreur';
+        }
+        else
+        {
+            setcookie($_GET['Nouvelle_Ville'],$_GET['Nouvelle_Ville'],time() + (86400 * 30),"/"); //86400 = 1 day
+        }
+    }
+    
 ?>
 
 
@@ -38,6 +53,12 @@
                             <option>La-chaux-de-fonds</option>
                             <option>Berne</option>
                             <option>Lausanne</option>
+                            <?php
+                            foreach ($_COOKIE as $value)
+                            {
+                                echo '<option>'.$value.'</otpion>';
+                            }
+                            ?>
                         </select>
                         <label> nombre de jours à afficher </label>
                         <select class="form-control" name="jours" size ="1">
@@ -68,7 +89,7 @@
                             </thead>
                             <tbody>
                                  <?php
-                                    $client = new ApiSimpleGetRestClient('http://www.prevision-meteo.ch/services/json');
+                                    
                                     $response =  $client->get('Neuchatel');
                                     $nbJours = 5;
                                     if(isset($_GET['validation']))
