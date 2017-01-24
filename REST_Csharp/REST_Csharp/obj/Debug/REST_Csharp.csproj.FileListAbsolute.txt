@@ -33,3 +33,16 @@ D:\Brandon\AndroidConnection\CSharp_REST_Avancer\REST_Csharp\REST_Csharp\obj\Deb
 D:\evaluationMeteo\REST_Csharp\REST_Csharp\bin\Debug\REST_Csharp.exe.config
 D:\evaluationMeteo\REST_Csharp\REST_Csharp\obj\Debug\REST_Csharp.exe
 D:\evaluationMeteo\REST_Csharp\REST_Csharp\obj\Debug\REST_Csharp.pdb
+D:\evaluationMeteo\REST_Csharp\REST_Csharp\bin\Debug\REST_Csharp.exe
+D:\evaluationMeteo\REST_Csharp\REST_Csharp\bin\Debug\REST_Csharp.pdb
+D:\evaluationMeteo\REST_Csharp\REST_Csharp\bin\Debug\Newtonsoft.Json.dll
+D:\evaluationMeteo\REST_Csharp\REST_Csharp\bin\Debug\Newtonsoft.Json.xml
+D:\evaluationMeteo\REST_Csharp\REST_Csharp\obj\Debug\REST_Csharp.csprojResolveAssemblyReference.cache
+D:\evaluationMeteo\REST_Csharp\REST_Csharp\obj\Debug\MainWindow.g.cs
+D:\evaluationMeteo\REST_Csharp\REST_Csharp\obj\Debug\App.g.cs
+D:\evaluationMeteo\REST_Csharp\REST_Csharp\obj\Debug\REST_Csharp_MarkupCompile.cache
+D:\evaluationMeteo\REST_Csharp\REST_Csharp\obj\Debug\REST_Csharp_MarkupCompile.lref
+D:\evaluationMeteo\REST_Csharp\REST_Csharp\obj\Debug\MainWindow.baml
+D:\evaluationMeteo\REST_Csharp\REST_Csharp\obj\Debug\REST_Csharp.g.resources
+D:\evaluationMeteo\REST_Csharp\REST_Csharp\obj\Debug\REST_Csharp.Properties.Resources.resources
+D:\evaluationMeteo\REST_Csharp\REST_Csharp\obj\Debug\REST_Csharp.csproj.GenerateResource.Cache
