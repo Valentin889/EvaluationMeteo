@@ -26,7 +26,6 @@ if (isset($_GET['EnvoieVille'])) {
         if ($b) {
             setcookie($_GET['Nouvelle_Ville'], $_GET['Nouvelle_Ville'], time() + (86400 * 30), "/"); //86400 = 1 day
             header("Refresh:0");
-            
         }
     }
 }
@@ -78,6 +77,7 @@ if (isset($_GET['EnvoieVille'])) {
                             for ($i = 1; $i < 6; $i++) {
                                 echo '<option>' . $i . '</option>';
                             }
+                            
                             ?>
                         </select>
                         <button type="submit" class="btn btn-primary" name ="validation"> valider</button>
