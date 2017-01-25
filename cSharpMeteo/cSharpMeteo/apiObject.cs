@@ -3,12 +3,13 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Newtonsoft.Json;
 
-namespace REST_Csharp
+namespace cSharpMeteo
 {
     public class Countries
     {
-        public List<Country> _CountriesList { get; set; }
+        public JsonArrayAttribute _CountriesList { get; set; }
     }
 
     public class Country

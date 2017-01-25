@@ -7,14 +7,47 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using HttpUtils;
+using Newtonsoft.Json;
 
 namespace cSharpMeteo
 {
-    public partial class Form1 : Form
+    public partial class FrmMeteo : Form
     {
-        public Form1()
+        Countries regionResponse = new Countries();
+        public FrmMeteo()
         {
             InitializeComponent();
+            cbxLocalite.Items.Add("Neuchâtel");
+            cbxLocalite.Items.Add("la-chaux-de-fonds");
+            cbxLocalite.Items.Add("Berne");
+            cbxLocalite.Items.Add("Lausanne");
+            cbxLocalite.Items.Add("Oceania");
+        }
+
+        private void cbxLocalite_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            try
+            {
+                   string endPoint = @"http://www.prevision-meteo.ch/services/json/" + cbxLocalite.Text;
+                // string endPoint = @"http://restcountries.eu/rest/v1/region/" + cbxLocalite.Text;
+
+                var client = new RestClient(endPoint);
+                var json = client.MakeRequest();
+                object objResponse = JsonConvert.DeserializeObject(json, typeof(Array));
+
+                //Converti dans le type requis
+                regionResponse._CountriesList = (JsonArrayAttribute)objResponse;
+
+
+                string t = regionResponse._CountriesList.ToString();
+
+                //Nouvelle données dans la liste des pays
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message);
+            }
         }
     }
 }

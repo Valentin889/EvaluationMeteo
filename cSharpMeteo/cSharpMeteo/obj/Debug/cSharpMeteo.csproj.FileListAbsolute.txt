@@ -1,1 +1,11 @@
 D:\evaluationMeteo\cSharpMeteo\cSharpMeteo\bin\Debug\cSharpMeteo.exe.config
+D:\evaluationMeteo\cSharpMeteo\cSharpMeteo\obj\Debug\cSharpMeteo.csprojResolveAssemblyReference.cache
+D:\evaluationMeteo\cSharpMeteo\cSharpMeteo\obj\Debug\cSharpMeteo.FrmMeteo.resources
+D:\evaluationMeteo\cSharpMeteo\cSharpMeteo\obj\Debug\cSharpMeteo.Properties.Resources.resources
+D:\evaluationMeteo\cSharpMeteo\cSharpMeteo\obj\Debug\cSharpMeteo.csproj.GenerateResource.Cache
+D:\evaluationMeteo\cSharpMeteo\cSharpMeteo\bin\Debug\cSharpMeteo.exe
+D:\evaluationMeteo\cSharpMeteo\cSharpMeteo\bin\Debug\cSharpMeteo.pdb
+D:\evaluationMeteo\cSharpMeteo\cSharpMeteo\bin\Debug\Newtonsoft.Json.dll
+D:\evaluationMeteo\cSharpMeteo\cSharpMeteo\bin\Debug\Newtonsoft.Json.xml
+D:\evaluationMeteo\cSharpMeteo\cSharpMeteo\obj\Debug\cSharpMeteo.exe
+D:\evaluationMeteo\cSharpMeteo\cSharpMeteo\obj\Debug\cSharpMeteo.pdb
