@@ -17,6 +17,7 @@ namespace cSharpMeteo
         public Fcst_Day_2 fcst_day_2 { get; set; }
         public Fcst_Day_3 fcst_day_3 { get; set; }
         public Fcst_Day_4 fcst_day_4 { get; set; }
+
     }
 
     public class City_Info

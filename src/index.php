@@ -24,7 +24,7 @@ if (isset($_GET['EnvoieVille'])) {
             }
         }
         if ($b) {
-            setcookie($_GET['Nouvelle_Ville'], $_GET['Nouvelle_Ville'], time() + (86400 * 30), "/"); //86400 = 1 day
+            setcookie($_GET['Nouvelle_Ville'], $_GET['Nouvelle_Ville'], time() + (86400 * 365), "/"); //86400 = 1 day
             header("Refresh:0");
         }
     }
