@@ -14,12 +14,19 @@ namespace cSharpMeteo
 {
     public partial class FrmMeteo : Form
     {
+       /// <summary>
+       /// initialisation des variables globales à la classe
+       /// </summary>
         private Rootobject regionReponse = new Rootobject();
         private TableLayoutPanel tlpAffichage;
+
+        /// <summary>
+        /// constructeur par défaut
+        /// </summary>
         public FrmMeteo()
         {
-            InitializeComponent();
 
+            InitializeComponent();
 
             ChargementListDeroulante();
 
@@ -50,15 +57,15 @@ namespace cSharpMeteo
         {
             if (Connection(tbxAjout.Text).fcst_day_0 != null)
             {
-                bool doublon = false;
+                bool bDoublon = false;
                 foreach (string s in cbxLocalite.Items)
                 {
                     if (tbxAjout.Text == s)
                     {
-                        doublon = true;
+                        bDoublon = true;
                     }
                 }
-                if (!doublon)
+                if (!bDoublon)
                 {
                     AjoutLocalite(tbxAjout.Text);
                     cbxLocalite.Items.Clear();
@@ -81,7 +88,6 @@ namespace cSharpMeteo
             try
             {
                 string endPoint = @"http://www.prevision-meteo.ch/services/json/" + localite;
-
                 var client = new RestClient(endPoint);
                 var json = client.MakeRequest();
 
