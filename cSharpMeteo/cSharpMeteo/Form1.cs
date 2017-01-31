@@ -71,8 +71,8 @@ namespace cSharpMeteo
             tlpAffichage.ColumnCount = iNbColonne;
             tlpAffichage.RowCount = iNbChamps;
 
-        
-            for(int i=0; i<iNbColonne; i++)
+
+            for (int i = 0; i < iNbColonne; i++)
             {
                 Label champ = new Label();
                 champ.Text = lstEnTete[i];
@@ -137,7 +137,7 @@ namespace cSharpMeteo
         private void AjoutLocalite(string localite)
         {
 
-            string Chemin  = "Source/localite.txt";
+            string Chemin = "Source/localite.txt";
             string[] Lignes = System.IO.File.ReadAllLines(Chemin);
             List<string> l = Lignes.ToList<string>();
             l.Add(localite);
@@ -153,8 +153,7 @@ namespace cSharpMeteo
             string[] Lignes = System.IO.File.ReadAllLines(Chemin);
 
             List<string> l = Lignes.ToList<string>();
-
-            foreach(string s in l)
+            foreach (string s in l)
             {
                 cbxLocalite.Items.Add(s);
             }
@@ -162,10 +161,10 @@ namespace cSharpMeteo
 
         private void btnValider_Click(object sender, EventArgs e)
         {
-            if(cbxLocalite.Text!=""&&cbxJours.Text!="")
+            if (cbxLocalite.Text != "" && cbxJours.Text != "")
             {
                 Rootobject InfoVille = Connection(cbxLocalite.Text);
-                GenernerChamp(Convert.ToInt32(cbxJours.Text),InfoVille);
+                GenernerChamp(Convert.ToInt32(cbxJours.Text), InfoVille);
             }
             else
             {
@@ -174,9 +173,26 @@ namespace cSharpMeteo
         }
         private void btnAjout_Click(object sender, EventArgs e)
         {
-            if(Connection(tbxAjout.Text).fcst_day_0!=null)
+            if (Connection(tbxAjout.Text).fcst_day_0 != null)
             {
-                AjoutLocalite(tbxAjout.Text);
+                bool doublon = false;
+                foreach (string s in cbxLocalite.Items)
+                {
+                    if (tbxAjout.Text == s)
+                    {
+                        doublon = true;
+                    }
+                }
+                if (!doublon)
+                {
+                    AjoutLocalite(tbxAjout.Text);
+                    cbxLocalite.Items.Clear();
+                    ChargementListDeroulante();
+                }
+                else
+                {
+                    MessageBox.Show("la ville entrée existe déjà");
+                }
             }
             else
             {
