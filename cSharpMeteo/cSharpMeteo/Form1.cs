@@ -14,7 +14,7 @@ namespace cSharpMeteo
 {
     public partial class FrmMeteo : Form
     {
-        Countries regionResponse = new Countries();
+        Rootobject regionResponse = new Rootobject();
         public FrmMeteo()
         {
             InitializeComponent();
@@ -29,20 +29,18 @@ namespace cSharpMeteo
         {
             try
             {
-                   string endPoint = @"http://www.prevision-meteo.ch/services/json/" + cbxLocalite.Text;
-                // string endPoint = @"http://restcountries.eu/rest/v1/region/" + cbxLocalite.Text;
+                string endPoint = @"http://www.prevision-meteo.ch/services/json/" + cbxLocalite.Text;
+              //  string endPoint = @"http://restcountries.eu/rest/v1/region/" + cbxLocalite.Text;
 
                 var client = new RestClient(endPoint);
                 var json = client.MakeRequest();
-                object objResponse = JsonConvert.DeserializeObject(json, typeof(Array));
 
-                //Converti dans le type requis
-                regionResponse._CountriesList = (JsonArrayAttribute)objResponse;
+//                object objResponse = JsonConvert.DeserializeObject(json, typeof(List<Country>));
 
+                object objResponse = JsonConvert.DeserializeObject(json, typeof(Rootobject));
 
-                string t = regionResponse._CountriesList.ToString();
+                regionResponse = (Rootobject)objResponse;
 
-                //Nouvelle données dans la liste des pays
             }
             catch (Exception ex)
             {
