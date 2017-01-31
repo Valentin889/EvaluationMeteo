@@ -19,14 +19,12 @@ namespace cSharpMeteo
         public FrmMeteo()
         {
             InitializeComponent();
-            cbxLocalite.Items.Add("Neuchâtel");
-            cbxLocalite.Items.Add("la-chaux-de-fonds");
-            cbxLocalite.Items.Add("Berne");
-            cbxLocalite.Items.Add("Lausanne");
+
+
+            ChargementListDeroulante();
 
             tlpAffichage = new TableLayoutPanel();
             tlpAffichage.Location = new Point(39, 196);
-            tlpAffichage.Width = ClientRectangle.Width - 2 * 39;
             tlpAffichage.AutoScroll = true;
             tlpAffichage.AutoSize = true;
             Controls.Add(tlpAffichage);
@@ -135,9 +133,32 @@ namespace cSharpMeteo
                 tlpAffichage.Controls.Add(champ1);
                 tlpAffichage.Controls.Add(champ2);
             }
-            tlpAffichage.Width = ClientRectangle.Width - 2 * 39;
+        }
+        private void AjoutLocalite(string localite)
+        {
+
+            string Chemin  = "Source/localite.txt";
+            string[] Lignes = System.IO.File.ReadAllLines(Chemin);
+            List<string> l = Lignes.ToList<string>();
+            l.Add(localite);
+            Lignes = l.ToArray();
+            System.IO.File.WriteAllLines(Chemin, Lignes);
+
         }
 
+        private void ChargementListDeroulante()
+        {
+            string Chemin = "Source/localite.txt";
+
+            string[] Lignes = System.IO.File.ReadAllLines(Chemin);
+
+            List<string> l = Lignes.ToList<string>();
+
+            foreach(string s in l)
+            {
+                cbxLocalite.Items.Add(s);
+            }
+        }
 
         private void btnValider_Click(object sender, EventArgs e)
         {
@@ -149,6 +170,17 @@ namespace cSharpMeteo
             else
             {
                 MessageBox.Show("veuillez entrer une ville et un nombre de jours");
+            }
+        }
+        private void btnAjout_Click(object sender, EventArgs e)
+        {
+            if(Connection(tbxAjout.Text).fcst_day_0!=null)
+            {
+                AjoutLocalite(tbxAjout.Text);
+            }
+            else
+            {
+                MessageBox.Show("entrer une localite valide");
             }
         }
     }
