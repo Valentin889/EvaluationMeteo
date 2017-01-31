@@ -34,7 +34,47 @@ namespace cSharpMeteo
                 cbxJours.Items.Add(i.ToString());
             }
         }
-
+        private void btnValider_Click(object sender, EventArgs e)
+        {
+            if (cbxLocalite.Text != "" && cbxJours.Text != "")
+            {
+                Rootobject InfoVille = Connection(cbxLocalite.Text);
+                GenernerChamp(Convert.ToInt32(cbxJours.Text), InfoVille);
+            }
+            else
+            {
+                MessageBox.Show("veuillez entrer une ville et un nombre de jours");
+            }
+        }
+        private void btnAjout_Click(object sender, EventArgs e)
+        {
+            if (Connection(tbxAjout.Text).fcst_day_0 != null)
+            {
+                bool doublon = false;
+                foreach (string s in cbxLocalite.Items)
+                {
+                    if (tbxAjout.Text == s)
+                    {
+                        doublon = true;
+                    }
+                }
+                if (!doublon)
+                {
+                    AjoutLocalite(tbxAjout.Text);
+                    cbxLocalite.Items.Clear();
+                    ChargementListDeroulante();
+                    MessageBox.Show("la ville a été correctement ajoutée");
+                }
+                else
+                {
+                    MessageBox.Show("la ville entrée existe déjà");
+                }
+            }
+            else
+            {
+                MessageBox.Show("entrer une localite valide");
+            }
+        }
 
         private Rootobject Connection(string localite)
         {
@@ -145,7 +185,6 @@ namespace cSharpMeteo
             System.IO.File.WriteAllLines(Chemin, Lignes);
 
         }
-
         private void ChargementListDeroulante()
         {
             string Chemin = "Source/localite.txt";
@@ -159,46 +198,7 @@ namespace cSharpMeteo
             }
         }
 
-        private void btnValider_Click(object sender, EventArgs e)
-        {
-            if (cbxLocalite.Text != "" && cbxJours.Text != "")
-            {
-                Rootobject InfoVille = Connection(cbxLocalite.Text);
-                GenernerChamp(Convert.ToInt32(cbxJours.Text), InfoVille);
-            }
-            else
-            {
-                MessageBox.Show("veuillez entrer une ville et un nombre de jours");
-            }
-        }
-        private void btnAjout_Click(object sender, EventArgs e)
-        {
-            if (Connection(tbxAjout.Text).fcst_day_0 != null)
-            {
-                bool doublon = false;
-                foreach (string s in cbxLocalite.Items)
-                {
-                    if (tbxAjout.Text == s)
-                    {
-                        doublon = true;
-                    }
-                }
-                if (!doublon)
-                {
-                    AjoutLocalite(tbxAjout.Text);
-                    cbxLocalite.Items.Clear();
-                    ChargementListDeroulante();
-                }
-                else
-                {
-                    MessageBox.Show("la ville entrée existe déjà");
-                }
-            }
-            else
-            {
-                MessageBox.Show("entrer une localite valide");
-            }
-        }
+       
     }
 }
 
