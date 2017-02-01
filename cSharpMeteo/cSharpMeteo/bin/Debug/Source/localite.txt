@@ -1,5 +1,4 @@
-Neuchâtel
+﻿Neuchâtel
 la-chaux-de-fonds
 Bern
 Lausanne
-le-locle

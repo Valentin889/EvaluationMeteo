@@ -14,22 +14,14 @@ namespace cSharpMeteo
 {
     public partial class FrmMeteo : Form
     {
-       /// <summary>
-       /// initialisation des variables globales à la classe
-       /// </summary>
         private Rootobject regionReponse = new Rootobject();
         private TableLayoutPanel tlpAffichage;
-
-        /// <summary>
-        /// constructeur par défaut, charge la list déroulante des localités, initialise une TableLayoutPanel
-        /// et ajoute les 5 numéros dams la liste des jours
-        /// </summary>
         public FrmMeteo()
         {
-
             InitializeComponent();
 
-            ChargementListDeroulanteLocalite();
+
+            ChargementListDeroulante();
 
             tlpAffichage = new TableLayoutPanel();
             tlpAffichage.Location = new Point(39, 196);
@@ -42,13 +34,6 @@ namespace cSharpMeteo
                 cbxJours.Items.Add(i.ToString());
             }
         }
-
-        /// <summary>
-        /// l'utilisateur valide la localité qu'il à choisi dans la liste déroulante et le nombre de jour qu'il souhaite afficher
-        /// cette méthode va appeler d'aute méthode de connection
-        /// </summary>
-        /// <param name="sender"></param>
-        /// <param name="e"></param>
         private void btnValider_Click(object sender, EventArgs e)
         {
             if (cbxLocalite.Text != "" && cbxJours.Text != "")
@@ -61,28 +46,23 @@ namespace cSharpMeteo
                 MessageBox.Show("veuillez entrer une ville et un nombre de jours");
             }
         }
-        /// <summary>
-        /// quand l'utilisateur veut ajouter une nouvelle ville il va cliquer sur ce bouton qui va vérifier si la vile existe bien avant de l'ajouter dans un fichier texte qui sera lut au début du programme
-        /// </summary>
-        /// <param name="sender"></param>
-        /// <param name="e"></param>
         private void btnAjout_Click(object sender, EventArgs e)
         {
             if (Connection(tbxAjout.Text).fcst_day_0 != null)
             {
-                bool bDoublon = false;
+                bool doublon = false;
                 foreach (string s in cbxLocalite.Items)
                 {
                     if (tbxAjout.Text == s)
                     {
-                        bDoublon = true;
+                        doublon = true;
                     }
                 }
-                if (!bDoublon)
+                if (!doublon)
                 {
                     AjoutLocalite(tbxAjout.Text);
                     cbxLocalite.Items.Clear();
-                    ChargementListDeroulanteLocalite();
+                    ChargementListDeroulante();
                     MessageBox.Show("la ville a été correctement ajoutée");
                 }
                 else
@@ -96,18 +76,12 @@ namespace cSharpMeteo
             }
         }
 
-        /// <summary>
-        /// reçoit une localité en paramètre, il va initialiser une connection vers les prévision météo avec la localité reçu
-        /// la méthode va convertir ce que l'on a reçu en objet de type Rootobject.
-        /// si tout c'est bien passé la méthode va renvoye le rootobject sinon elle va renvoyer null
-        /// </summary>
-        /// <param name="localite"></param>
-        /// <returns></returns>
         private Rootobject Connection(string localite)
         {
             try
             {
                 string endPoint = @"http://www.prevision-meteo.ch/services/json/" + localite;
+
                 var client = new RestClient(endPoint);
                 var json = client.MakeRequest();
 
@@ -123,13 +97,6 @@ namespace cSharpMeteo
                 return null;
             }
         }
-        /// <summary>
-        /// génère les champs en fonction du nombre de jour que l'on veut afficher,
-        /// place le bon texte aux bons endroits
-        /// pour l'instant l'affichage se fait avec un switch, des recherches doivent être faites pour savoir si une concaténation est possible
-        /// </summary>
-        /// <param name="iNbChamps"></param>
-        /// <param name="infoVille"></param>
         private void GenernerChamp(int iNbChamps, Rootobject infoVille)
         {
             int iNbColonne = 4;
@@ -218,7 +185,7 @@ namespace cSharpMeteo
             System.IO.File.WriteAllLines(Chemin, Lignes);
 
         }
-        private void ChargementListDeroulanteLocalite()
+        private void ChargementListDeroulante()
         {
             string Chemin = "Source/localite.txt";
 
