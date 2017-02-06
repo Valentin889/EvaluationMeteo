@@ -12,8 +12,8 @@ $array = array(
 
 
 if (isset($_GET['EnvoieVille'])) {
-    $response = $client->get($_GET['Nouvelle_Ville']);
-    $data = json_decode(($response), true);
+    $reponse = $client->get($_GET['Nouvelle_Ville']);
+    $data = json_decode(($reponse), true);
     if (isset($data['errors'])) {
         echo 'erreur';
     } else {
@@ -100,13 +100,13 @@ if (isset($_GET['EnvoieVille'])) {
                             </thead>
                             <tbody>
                                 <?php
-                                $response = $client->get('Neuchatel');
+                                $reponse = $client->get('Neuchatel');
                                 $nbJours = 5;
                                 if (isset($_GET['validation'])) {
-                                    $response = $client->get($_GET['ville']);
+                                    $reponse = $client->get($_GET['ville']);
                                     $nbJours = $_GET['jours'];
                                 }
-                                $data = json_decode(($response), true);
+                                $data = json_decode(($reponse), true);
 
                                 for ($i = 0; $i < $nbJours; $i++) {
                                     echo '<tr>';
